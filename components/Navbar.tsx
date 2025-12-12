@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { Menu, X, HardHat, Leaf } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,12 +20,21 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={() => window.location.href = '#'}>
-              <div className="relative">
-                <HardHat className="h-8 w-8 text-emerald-700" />
-                <Leaf className="h-4 w-4 text-green-500 absolute -bottom-1 -right-1" />
-              </div>
-              <span className="font-bold text-2xl text-emerald-900 tracking-tight">ECOHOUSE</span>
+            <div 
+              className="flex-shrink-0 flex items-center cursor-pointer" 
+              onClick={() => window.location.href = '#'}
+            >
+              {/* Espaço dedicado para a Logo */}
+              <img 
+                src="/img/logo.png" 
+                alt="CONSTRUÇÕES SUSTENTÁVEIS" 
+                className="h-12 w-auto object-contain transition-transform hover:scale-105"
+                onError={(e) => {
+                  // Fallback caso a imagem ainda não exista ou falhe
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  (e.target as HTMLImageElement).parentElement!.innerHTML += '<span class="font-bold text-xl text-emerald-900">CONSTRUÇÕES SUSTENTÁVEIS</span>';
+                }}
+              />
             </div>
           </div>
           

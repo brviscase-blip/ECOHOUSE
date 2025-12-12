@@ -2,19 +2,15 @@ import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { AIModel } from "../types";
 
 // Initialize the client with the API key from the environment
-// Note: In a real production app, backend proxy is recommended to hide the key.
-// For this demo, we assume process.env.API_KEY is available.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+// Using the recommended initialization pattern: new GoogleGenAI({ apiKey: process.env.API_KEY })
+// DO NOT use || '' as the key must be provided directly from the environment.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const sendMessageToGemini = async (
   message: string,
   history: { role: string; parts: { text: string }[] }[] = []
 ): Promise<string> => {
   try {
-    if (!process.env.API_KEY) {
-      return "A chave da API não foi configurada. Por favor, verifique suas configurações.";
-    }
-
     const model = AIModel.FLASH;
 
     const systemInstruction = `
@@ -29,10 +25,8 @@ export const sendMessageToGemini = async (
       6. Seja conciso nas respostas.
     `;
 
-    // Using the chat feature to maintain context if needed, but here we treat it as a single generateContent with instruction
-    // for simplicity in this specific integration, or use ai.chats.create if persistent history is managed by the service.
-    // Given the component manages history visually, let's use generateContent with system instruction.
-    
+    // Always use ai.models.generateContent to query GenAI with both the model name and prompt.
+    // Ensure contents follows the required structure of an array of objects with parts.
     const response: GenerateContentResponse = await ai.models.generateContent({
       model: model,
       contents: [
@@ -45,6 +39,7 @@ export const sendMessageToGemini = async (
       }
     });
 
+    // Access the .text property directly (not as a method).
     return response.text || "Desculpe, não consegui processar sua resposta no momento.";
 
   } catch (error) {
