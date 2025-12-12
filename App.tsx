@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -16,7 +17,6 @@ const App: React.FC = () => {
         <Hero />
         <Services />
         
-        {/* Sustainability Highlight Section */}
         <section id="sustainability" className="py-20 bg-emerald-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2">
@@ -30,7 +30,7 @@ const App: React.FC = () => {
               <h2 className="text-emerald-400 font-semibold uppercase tracking-wider">Nosso Compromisso</h2>
               <h3 className="text-4xl font-bold">Construção Verde não é apenas tendência, é necessidade.</h3>
               <p className="text-emerald-100 text-lg leading-relaxed">
-                Na ECOHOUSE, cada projeto é pensado para minimizar o impacto ambiental. Utilizamos materiais recicláveis, sistemas de eficiência energética e gestão inteligente de resíduos em todos os canteiros de obra.
+                Na CONSTRUÇÕES SUSTENTÁVEIS, cada projeto é pensado para minimizar o impacto ambiental. Utilizamos materiais recicláveis, sistemas de eficiência energética e gestão inteligente de resíduos em todos os canteiros de obra.
               </p>
               <ul className="space-y-4 mt-4">
                 {[
@@ -56,8 +56,6 @@ const App: React.FC = () => {
       </main>
 
       <Footer />
-      
-      {/* AI Assistant Floating Widget */}
       <AIConsultant />
     </div>
   );

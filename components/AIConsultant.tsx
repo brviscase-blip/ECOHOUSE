@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, Send, X, Loader2, Bot } from 'lucide-react';
 import { sendMessageToGemini } from '../services/geminiService';
@@ -10,7 +11,7 @@ const AIConsultant: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'model',
-      text: 'Olá! Sou o consultor virtual da ECOHOUSE. Posso ajudar com informações sobre obras, materiais sustentáveis ou estimativas iniciais. Como posso ajudar hoje?'
+      text: 'Olá! Sou o consultor virtual da CONSTRUÇÕES SUSTENTÁVEIS. Posso ajudar com informações sobre obras, materiais sustentáveis ou estimativas iniciais. Como posso ajudar hoje?'
     }
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -34,7 +35,6 @@ const AIConsultant: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Construct history for the API
       const history = messages.map(m => ({
         role: m.role === 'model' ? 'model' : 'user',
         parts: [{ text: m.text }]
@@ -59,17 +59,15 @@ const AIConsultant: React.FC = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end font-sans">
-      {/* Chat Window */}
       {isOpen && (
         <div className="mb-4 w-[90vw] md:w-96 h-[500px] max-h-[70vh] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden animate-fade-in-up">
-          {/* Header */}
           <div className="bg-emerald-700 p-4 flex justify-between items-center">
             <div className="flex items-center gap-3">
               <div className="bg-white/20 p-2 rounded-full">
                 <Bot className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h3 className="font-bold text-white text-sm">Consultor ECOHOUSE</h3>
+                <h3 className="font-bold text-white text-sm">Consultor C. SUSTENTÁVEIS</h3>
                 <p className="text-emerald-200 text-xs">IA Powered by Gemini</p>
               </div>
             </div>
@@ -81,7 +79,6 @@ const AIConsultant: React.FC = () => {
             </button>
           </div>
 
-          {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
             {messages.map((msg, idx) => (
               <div 
@@ -111,7 +108,6 @@ const AIConsultant: React.FC = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Area */}
           <div className="p-4 bg-white border-t border-gray-100">
             <div className="flex gap-2">
               <input
@@ -131,14 +127,10 @@ const AIConsultant: React.FC = () => {
                 {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
               </button>
             </div>
-            <div className="text-center mt-2">
-              <p className="text-[10px] text-gray-400">A IA pode cometer erros. Verifique informações cruciais.</p>
-            </div>
           </div>
         </div>
       )}
 
-      {/* Toggle Button */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
