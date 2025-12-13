@@ -10,26 +10,32 @@
       tailwind.config = {
         theme: {
           extend: {
+            fontFamily: {
+              sans: ['Fahkwang', 'sans-serif'],
+            },
             colors: {
               emerald: {
-                50: '#f0f9f9',
-                100: '#dcf1f0',
-                200: '#b9e3e1',
-                300: '#89cfcb',
-                400: '#54b1ad',
-                500: '#1BA19A',
-                600: '#16827d',
+                50: '#f2f8f7',
+                100: '#e1eeec',
+                200: '#c5ddd9',
+                300: '#9bc2bc',
+                400: '#6ea199',
+                500: '#1BA19A', // Cor principal mantida como base
+                600: '#15827d',
                 700: '#126a66',
-                800: '#0f5451',
-                900: '#0d4543',
-                950: '#072726',
+                800: '#115653',
+                900: '#104845',
+                950: '#082a29',
+              },
+              slate: {
+                900: '#0f171a',
               }
             }
           }
         }
       }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fahkwang:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/index.css">
   <script type="importmap">
 {
@@ -46,7 +52,7 @@
 }
 </script>
 </head>
-  <body class="bg-gray-50 text-gray-900">
+  <body class="bg-gray-50 text-gray-900 font-sans">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

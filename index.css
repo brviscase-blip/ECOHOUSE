@@ -1,8 +1,7 @@
-/* Estilos globais sem conflito com o CDN */
+/* Estilos globais com a hierarquia Fahkwang */
 :root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: 'Fahkwang', system-ui, sans-serif;
+  line-height: 1.6;
 }
 
 html {
@@ -13,6 +12,14 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Títulos com a pegada geométrica da Fahkwang */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 /* Animações suaves */
@@ -28,10 +35,9 @@ body {
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.5s ease-out forwards;
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Ajuste para garantir que a logo não fique esticada */
 img {
   max-width: 100%;
   height: auto;

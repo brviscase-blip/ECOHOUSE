@@ -2,6 +2,9 @@ import React from 'react';
 import { Facebook, Instagram, Linkedin } from 'lucide-react';
 
 const Footer: React.FC = () => {
+  // COLE O LINK DA SUA LOGO AQUI TAMBÉM
+  const LOGO_URL = "/img/logo.png";
+
   return (
     <footer className="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,16 +12,17 @@ const Footer: React.FC = () => {
           <div>
             <div className="mb-6">
               <img 
-                src="/img/logo.png" 
+                src={LOGO_URL} 
                 alt="CONSTRUÇÕES SUSTENTÁVEIS" 
                 className="h-10 w-auto object-contain brightness-0 invert" 
+                crossOrigin="anonymous"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.style.display = 'none';
                   const parent = target.parentElement;
                   if (parent && !parent.querySelector('.footer-fallback')) {
                     const span = document.createElement('span');
-                    span.className = 'footer-fallback font-bold text-xl';
+                    span.className = 'footer-fallback font-bold text-xl text-white';
                     span.innerText = 'CONSTRUÇÕES SUSTENTÁVEIS';
                     parent.appendChild(span);
                   }

@@ -3,6 +3,9 @@ import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  
+  // COLE O LINK DA SUA LOGO AQUI (Imgur, PostImages, Cloudinary, etc.)
+  const LOGO_URL = "/img/logo.png"; 
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -24,17 +27,17 @@ const Navbar: React.FC = () => {
               onClick={() => window.location.href = '#'}
             >
               <img 
-                src="/img/logo.png" 
+                src={LOGO_URL} 
                 alt="CONSTRUÇÕES SUSTENTÁVEIS" 
                 className="h-12 w-auto object-contain transition-transform hover:scale-105"
+                crossOrigin="anonymous"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  // Se a imagem falhar, mostramos um texto estilizado como fallback
                   target.style.display = 'none';
                   const parent = target.parentElement;
                   if (parent && !parent.querySelector('.fallback-text')) {
                     const span = document.createElement('span');
-                    span.className = 'fallback-text font-bold text-xl text-emerald-900 tracking-tight';
+                    span.className = 'fallback-text font-bold text-xl text-emerald-900 tracking-tight whitespace-nowrap';
                     span.innerText = 'CONSTRUÇÕES SUSTENTÁVEIS';
                     parent.appendChild(span);
                   }
