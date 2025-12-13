@@ -21,6 +21,7 @@ export interface BlogPost {
   category: string;
   title: string;
   excerpt: string;
+  content?: string; // Conteúdo completo do artigo
   imageUrl: string;
   readTime: string;
 }
