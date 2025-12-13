@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Facebook, Instagram, Linkedin } from 'lucide-react';
 
@@ -7,7 +6,6 @@ const Footer: React.FC = () => {
     <footer className="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Brand */}
           <div>
             <div className="mb-6">
               <img 
@@ -15,8 +13,15 @@ const Footer: React.FC = () => {
                 alt="CONSTRUÇÕES SUSTENTÁVEIS" 
                 className="h-10 w-auto object-contain brightness-0 invert" 
                 onError={(e) => {
-                   (e.target as HTMLImageElement).style.display = 'none';
-                   (e.target as HTMLImageElement).parentElement!.innerHTML += '<span class="font-bold text-xl">CONSTRUÇÕES SUSTENTÁVEIS</span>';
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent && !parent.querySelector('.footer-fallback')) {
+                    const span = document.createElement('span');
+                    span.className = 'footer-fallback font-bold text-xl';
+                    span.innerText = 'CONSTRUÇÕES SUSTENTÁVEIS';
+                    parent.appendChild(span);
+                  }
                 }}
               />
             </div>
@@ -36,7 +41,6 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="text-lg font-semibold mb-6 text-white">Links Rápidos</h4>
             <ul className="space-y-3">
@@ -47,7 +51,6 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Services */}
           <div>
             <h4 className="text-lg font-semibold mb-6 text-white">Serviços</h4>
             <ul className="space-y-3">
@@ -58,11 +61,10 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div>
             <h4 className="text-lg font-semibold mb-6 text-white">Newsletter</h4>
             <p className="text-gray-400 mb-4 text-sm">Receba novidades sobre construção sustentável.</p>
-            <form className="flex flex-col gap-3">
+            <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
               <input 
                 type="email" 
                 placeholder="Seu e-mail" 

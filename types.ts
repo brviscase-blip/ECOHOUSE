@@ -14,13 +14,3 @@ export interface Service {
   icon: React.ReactNode;
   description: string;
 }
-
-export interface ChatMessage {
-  role: 'user' | 'model';
-  text: string;
-  isError?: boolean;
-}
-
-export enum AIModel {
-  FLASH = 'gemini-2.5-flash'
-}

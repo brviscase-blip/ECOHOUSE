@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -24,21 +23,25 @@ const Navbar: React.FC = () => {
               className="flex-shrink-0 flex items-center cursor-pointer" 
               onClick={() => window.location.href = '#'}
             >
-              {/* Espaço dedicado para a Logo */}
               <img 
                 src="/img/logo.png" 
                 alt="CONSTRUÇÕES SUSTENTÁVEIS" 
                 className="h-12 w-auto object-contain transition-transform hover:scale-105"
                 onError={(e) => {
-                  // Fallback caso a imagem ainda não exista ou falhe
-                  (e.target as HTMLImageElement).style.display = 'none';
-                  (e.target as HTMLImageElement).parentElement!.innerHTML += '<span class="font-bold text-xl text-emerald-900">CONSTRUÇÕES SUSTENTÁVEIS</span>';
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent && !parent.querySelector('.fallback-text')) {
+                    const span = document.createElement('span');
+                    span.className = 'fallback-text font-bold text-xl text-emerald-900';
+                    span.innerText = 'CONSTRUÇÕES SUSTENTÁVEIS';
+                    parent.appendChild(span);
+                  }
                 }}
               />
             </div>
           </div>
           
-          {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <a
@@ -57,7 +60,6 @@ const Navbar: React.FC = () => {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="flex items-center md:hidden">
             <button
               onClick={toggleMenu}
@@ -69,7 +71,6 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-white border-t border-gray-100">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
