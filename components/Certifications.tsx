@@ -21,7 +21,7 @@ const Certifications: React.FC = () => {
   ];
 
   return (
-    <section id="certifications" className="py-40 bg-[#F9FBFA] dark:bg-slate-950 border-y border-gray-100 dark:border-slate-900 transition-colors">
+    <section id="certifications" className="py-40 bg-white dark:bg-slate-950 border-y border-gray-100 dark:border-slate-900 transition-colors">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div>
@@ -47,8 +47,8 @@ const Certifications: React.FC = () => {
 
           <div className="grid grid-cols-1 gap-4">
             {certifications.map((cert, idx) => (
-              <div key={idx} className="bg-white dark:bg-slate-900 p-10 rounded-2xl border border-gray-200/50 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-emerald-500/30 transition-all group flex items-start gap-8">
-                <div className="p-4 bg-gray-50 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 rounded-xl group-hover:bg-emerald-600 group-hover:text-white transition-all">
+              <div key={idx} className="bg-gray-50 dark:bg-slate-900 p-10 rounded-2xl border border-gray-200/50 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-emerald-500/30 transition-all group flex items-start gap-8">
+                <div className="p-4 bg-white dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 rounded-xl group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
                   {cert.icon}
                 </div>
                 <div>

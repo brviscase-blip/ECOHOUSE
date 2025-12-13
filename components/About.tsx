@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Upload, Image as ImageIcon, Save, Edit3 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Upload, Save, Edit3 } from 'lucide-react';
 
 interface AboutTexts {
   title: string;
@@ -53,16 +53,16 @@ const About: React.FC<AboutProps> = ({ isAdmin }) => {
   };
 
   return (
-    <section id="about" className="py-40 bg-white dark:bg-slate-950 relative overflow-hidden transition-colors">
+    <section id="about" className="py-40 bg-[#0a0f12] text-white relative overflow-hidden transition-colors">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-24">
         <div className="lg:w-1/2 relative group">
           <div className="absolute -top-10 -left-10 w-40 h-40 border-l border-t border-emerald-500/20 pointer-events-none"></div>
           
-          <div className="relative aspect-[4/5] overflow-hidden bg-slate-100 dark:bg-slate-900 shadow-2xl">
+          <div className="relative aspect-[4/5] overflow-hidden bg-slate-900 shadow-2xl">
             <img 
               src={imageUrl} 
               alt="Engenharia de Valor" 
-              className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+              className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"
             />
             
             {isAdmin && (
@@ -82,11 +82,11 @@ const About: React.FC<AboutProps> = ({ isAdmin }) => {
         <div className="lg:w-1/2 space-y-12">
           <div className="space-y-6">
             <div className="flex justify-between items-start">
-              <h2 className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-[0.4em]">Nosso Manifesto</h2>
+              <h2 className="text-[10px] text-emerald-400 font-bold uppercase tracking-[0.4em]">Nosso Manifesto</h2>
               {isAdmin && !isEditingTexts && (
                 <button 
                   onClick={() => setIsEditingTexts(true)}
-                  className="p-2 text-emerald-600 bg-emerald-50 dark:bg-slate-900 rounded-full hover:bg-emerald-100 transition-colors"
+                  className="p-2 text-emerald-400 bg-emerald-400/10 rounded-full hover:bg-emerald-400/20 transition-colors"
                 >
                   <Edit3 className="h-4 w-4" />
                 </button>
@@ -97,13 +97,13 @@ const About: React.FC<AboutProps> = ({ isAdmin }) => {
               <textarea 
                 value={texts.title}
                 onChange={(e) => setTexts({ ...texts, title: e.target.value })}
-                className="w-full text-5xl font-bold bg-transparent border-b-2 border-emerald-500 outline-none text-slate-900 dark:text-white leading-[1.1] tracking-tighter"
+                className="w-full text-5xl font-bold bg-transparent border-b-2 border-emerald-500 outline-none text-white leading-[1.1] tracking-tighter"
                 rows={2}
               />
             ) : (
-              <h3 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tighter transition-colors">
+              <h3 className="text-5xl md:text-6xl font-bold text-white leading-[1.1] tracking-tighter transition-colors">
                 {texts.title.split(' ').map((word, i) => (
-                  <span key={i} className={word.toLowerCase() === 'responsabilidade.' ? 'text-emerald-500' : ''}>
+                  <span key={i} className={word.toLowerCase() === 'responsabilidade.' ? 'text-emerald-400' : ''}>
                     {word}{' '}
                   </span>
                 ))}
@@ -115,47 +115,20 @@ const About: React.FC<AboutProps> = ({ isAdmin }) => {
             <textarea 
               value={texts.description}
               onChange={(e) => setTexts({ ...texts, description: e.target.value })}
-              className="w-full text-lg font-light leading-loose bg-transparent border border-emerald-500/30 p-4 rounded-xl text-slate-900 dark:text-white outline-none"
+              className="w-full text-lg font-light leading-loose bg-transparent border border-emerald-500/30 p-4 rounded-xl text-white outline-none"
               rows={5}
             />
           ) : (
-            <p className="text-gray-500 dark:text-gray-300 text-lg font-light leading-loose transition-colors">
+            <p className="text-slate-400 text-lg font-light leading-loose transition-colors">
               {texts.description}
             </p>
           )}
           
-          <div className="grid grid-cols-2 gap-y-10 pt-4 border-t border-gray-100 dark:border-slate-800 transition-colors">
+          <div className="grid grid-cols-2 gap-y-10 pt-8 border-t border-white/10 transition-colors">
             {texts.stats.map((stat, idx) => (
               <div key={idx} className="space-y-2">
-                {isEditingTexts ? (
-                  <div className="space-y-1">
-                    <input 
-                      type="text" 
-                      value={stat.value}
-                      onChange={(e) => {
-                        const newStats = [...texts.stats];
-                        newStats[idx].value = e.target.value;
-                        setTexts({ ...texts, stats: newStats });
-                      }}
-                      className="w-full bg-transparent border-b border-emerald-500 font-bold text-slate-900 dark:text-white outline-none"
-                    />
-                    <input 
-                      type="text" 
-                      value={stat.label}
-                      onChange={(e) => {
-                        const newStats = [...texts.stats];
-                        newStats[idx].label = e.target.value;
-                        setTexts({ ...texts, stats: newStats });
-                      }}
-                      className="w-full bg-transparent border-b border-emerald-500/30 text-[9px] font-bold uppercase tracking-[0.2em] text-emerald-600 outline-none"
-                    />
-                  </div>
-                ) : (
-                  <>
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">{stat.value}</p>
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">{stat.label}</p>
-                  </>
-                )}
+                <p className="text-3xl font-bold text-white transition-colors">{stat.value}</p>
+                <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-emerald-400">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -169,12 +142,8 @@ const About: React.FC<AboutProps> = ({ isAdmin }) => {
                 <Save className="h-4 w-4" /> Salvar Textos
               </button>
               <button 
-                onClick={() => {
-                  const saved = localStorage.getItem('cs_about_texts');
-                  setTexts(saved ? JSON.parse(saved) : DEFAULT_TEXTS);
-                  setIsEditingTexts(false);
-                }}
-                className="px-8 py-3 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-slate-300 transition-all"
+                onClick={() => setIsEditingTexts(false)}
+                className="px-8 py-3 bg-slate-800 text-slate-400 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-slate-700 transition-all"
               >
                 Cancelar
               </button>
