@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Upload } from 'lucide-react';
+import { ArrowRight, Upload, Check, X, RotateCcw } from 'lucide-react';
 
 interface HeroProps {
   isAdmin?: boolean;
@@ -10,17 +10,30 @@ const Hero: React.FC<HeroProps> = ({ isAdmin }) => {
     return localStorage.getItem('cs_hero_bg') || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80";
   });
 
+  const [pendingBgUrl, setPendingBgUrl] = useState<string | null>(null);
+
   const handleBgUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64 = reader.result as string;
-        setBgUrl(base64);
-        localStorage.setItem('cs_hero_bg', base64);
+        setPendingBgUrl(base64);
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleConfirmChange = () => {
+    if (pendingBgUrl) {
+      setBgUrl(pendingBgUrl);
+      localStorage.setItem('cs_hero_bg', pendingBgUrl);
+      setPendingBgUrl(null);
+    }
+  };
+
+  const handleDiscardChange = () => {
+    setPendingBgUrl(null);
   };
 
   return (
@@ -28,21 +41,44 @@ const Hero: React.FC<HeroProps> = ({ isAdmin }) => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src={bgUrl}
+          src={pendingBgUrl || bgUrl}
           alt="Arquitetura Moderna"
-          className="w-full h-full object-cover animate-slow-zoom"
+          className={`w-full h-full object-cover transition-all duration-700 ${pendingBgUrl ? 'scale-105 brightness-110' : 'animate-slow-zoom'}`}
         />
         <div className="absolute inset-0 bg-slate-950/85"></div>
       </div>
 
-      {/* Editor Controls - Moved to high z-index and fixed pointer events */}
+      {/* Editor Controls */}
       {isAdmin && (
-        <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none opacity-0 group-hover/hero:opacity-100 transition-opacity duration-500 bg-slate-950/20 backdrop-blur-[2px]">
-          <label className="pointer-events-auto flex items-center gap-3 px-8 py-4 bg-white text-slate-900 rounded-full text-[10px] font-extrabold uppercase tracking-widest cursor-pointer hover:bg-emerald-50 transition-all shadow-2xl hover:-translate-y-1">
-            <Upload className="h-4 w-4" />
-            Alterar Fundo do Hero
-            <input type="file" accept="image/*" onChange={handleBgUpload} className="hidden" />
-          </label>
+        <div className="absolute inset-0 z-30 flex flex-col items-center justify-center pointer-events-none transition-all duration-500 bg-slate-950/10">
+          
+          {pendingBgUrl ? (
+            <div className="pointer-events-auto flex flex-col items-center gap-6 animate-fade-in-up">
+              <div className="bg-white/10 backdrop-blur-md p-2 rounded-2xl border border-white/20 flex gap-2 shadow-2xl">
+                <button 
+                  onClick={handleConfirmChange}
+                  className="flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg"
+                >
+                  <Check className="h-4 w-4" /> Confirmar Fundo
+                </button>
+                <button 
+                  onClick={handleDiscardChange}
+                  className="flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg"
+                >
+                  <RotateCcw className="h-4 w-4" /> Reverter
+                </button>
+              </div>
+              <span className="text-white/60 text-[9px] font-bold uppercase tracking-[0.3em] bg-slate-950/40 px-4 py-2 rounded-full backdrop-blur-sm">
+                Pré-visualizando nova imagem
+              </span>
+            </div>
+          ) : (
+            <label className="pointer-events-auto opacity-0 group-hover/hero:opacity-100 flex items-center gap-3 px-8 py-4 bg-white text-slate-900 rounded-full text-[10px] font-extrabold uppercase tracking-widest cursor-pointer hover:bg-emerald-50 transition-all shadow-2xl hover:-translate-y-1">
+              <Upload className="h-4 w-4" />
+              Alterar Fundo do Hero
+              <input type="file" accept="image/*" onChange={handleBgUpload} className="hidden" />
+            </label>
+          )}
         </div>
       )}
 
