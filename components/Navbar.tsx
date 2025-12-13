@@ -29,11 +29,12 @@ const Navbar: React.FC = () => {
                 className="h-12 w-auto object-contain transition-transform hover:scale-105"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
+                  // Se a imagem falhar, mostramos um texto estilizado como fallback
                   target.style.display = 'none';
                   const parent = target.parentElement;
                   if (parent && !parent.querySelector('.fallback-text')) {
                     const span = document.createElement('span');
-                    span.className = 'fallback-text font-bold text-xl text-emerald-900';
+                    span.className = 'fallback-text font-bold text-xl text-emerald-900 tracking-tight';
                     span.innerText = 'CONSTRUÇÕES SUSTENTÁVEIS';
                     parent.appendChild(span);
                   }
