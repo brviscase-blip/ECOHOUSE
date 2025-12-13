@@ -5,77 +5,77 @@ import { Service } from '../types';
 const services: Service[] = [
   {
     id: 1,
-    title: 'Construção Comercial',
-    icon: <Building2 className="h-8 w-8" />,
-    description: 'Edifícios corporativos e galpões logísticos com máxima eficiência operacional.'
+    title: 'Edificações Corporativas',
+    icon: <Building2 className="h-6 w-6" />,
+    description: 'Soluções integradas para complexos comerciais com foco em eficiência e automação.'
   },
   {
     id: 2,
-    title: 'Residencial Premium',
-    icon: <Home className="h-8 w-8" />,
-    description: 'Projetos exclusivos que harmonizam luxo, conforto e baixo impacto ambiental.'
+    title: 'Residências Sustentáveis',
+    icon: <Home className="h-6 w-6" />,
+    description: 'Arquitetura premium que respeita o ecossistema e maximiza o conforto térmico.'
   },
   {
     id: 3,
-    title: 'Retrofit & Modernização',
-    icon: <Hammer className="h-8 w-8" />,
-    description: 'Renovação completa de estruturas, trazendo tecnologias de ponta para prédios antigos.'
+    title: 'Retrofit Estrutural',
+    icon: <Hammer className="h-6 w-6" />,
+    description: 'Modernização de ativos imobiliários com tecnologias de baixo impacto ambiental.'
   },
   {
     id: 4,
-    title: 'Certificação LEED',
-    icon: <Leaf className="h-8 w-8" />,
-    description: 'Consultoria especializada para obtenção de selos de sustentabilidade globais.'
+    title: 'Consultoria LEED & WELL',
+    icon: <Leaf className="h-6 w-6" />,
+    description: 'Acompanhamento técnico para certificações globais de sustentabilidade e bem-estar.'
   },
   {
     id: 5,
-    title: 'Gerenciamento 360°',
-    icon: <ShieldCheck className="h-8 w-8" />,
-    description: 'Controle rigoroso de cronograma, custos e padrões técnicos de qualidade.'
+    title: 'Gestão de Ativos BIM',
+    icon: <ShieldCheck className="h-6 w-6" />,
+    description: 'Controle total do ciclo de vida da obra através de modelagem inteligente de dados.'
   },
   {
     id: 6,
-    title: 'Engenharia Integrada',
-    icon: <Ruler className="h-8 w-8" />,
-    description: 'Desenvolvimento de projetos estruturais e complementares em plataforma BIM.'
+    title: 'Infraestrutura Urbana',
+    icon: <Ruler className="h-6 w-6" />,
+    description: 'Projetos de engenharia civil que integram o meio urbano à natureza de forma funcional.'
   }
 ];
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="py-32 bg-gray-50/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-xs text-emerald-600 font-bold tracking-[0.3em] uppercase mb-4">Soluções</h2>
-          <p className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-            Excelência em Engenharia
-          </p>
-          <div className="w-16 h-1 bg-emerald-500 mx-auto mt-6"></div>
+    <section id="services" className="py-32 bg-white dark:bg-slate-950">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-8">
+          <div className="max-w-2xl">
+            <h2 className="text-[10px] text-emerald-600 font-bold tracking-[0.4em] uppercase mb-6 flex items-center gap-3">
+              <span className="h-px w-8 bg-emerald-600"></span> Nossas Soluções
+            </h2>
+            <p className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight transition-colors">
+              Engenharia de precisão para um mundo em transformação.
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-gray-100 dark:border-slate-800">
           {services.map((service) => (
             <div 
               key={service.id} 
-              className="group relative bg-white p-10 border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+              className="group p-12 border-r border-b border-gray-100 dark:border-slate-800 hover:bg-gray-50 dark:hover:bg-slate-900 transition-all duration-500"
             >
-              {/* Decorative accent bar on hover */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-emerald-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-              
-              <div className="w-16 h-16 bg-emerald-50 flex items-center justify-center mb-8 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-500">
+              <div className="w-12 h-12 flex items-center justify-center mb-10 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform duration-500">
                 {service.icon}
               </div>
               
-              <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight group-hover:text-emerald-700 transition-colors">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight transition-colors">
                 {service.title}
               </h3>
               
-              <p className="text-gray-500 font-light leading-relaxed text-base">
+              <p className="text-gray-500 dark:text-gray-400 font-light leading-relaxed text-sm mb-10 transition-colors">
                 {service.description}
               </p>
               
-              <div className="mt-8 flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-                Saiba Mais <span className="ml-2">→</span>
+              <div className="flex items-center text-[9px] font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-500">
+                Detalhes <span className="ml-3">→</span>
               </div>
             </div>
           ))}

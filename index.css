@@ -1,6 +1,6 @@
-/* Estilos globais com a hierarquia Fahkwang */
+/* Estilos globais com a hierarquia Ubuntu para apoio e Fahkwang para títulos */
 :root {
-  font-family: 'Fahkwang', system-ui, sans-serif;
+  font-family: 'Ubuntu', system-ui, sans-serif;
   line-height: 1.6;
 }
 
@@ -14,19 +14,49 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.5s ease;
 }
 
-/* Títulos com a pegada geométrica da Fahkwang */
-h1, h2, h3, h4 {
+/* Divisor Técnico entre Seções - Apenas a Linha Minimalista */
+.section-divider {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(to right, transparent, rgba(27, 161, 154, 0.15), transparent);
+  margin: 0;
+}
+
+.dark .section-divider {
+  background: linear-gradient(to right, transparent, rgba(27, 161, 154, 0.1), transparent);
+}
+
+/* Efeito de Revelação Suave ao Scroll */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Transição global refinada */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Fahkwang', sans-serif;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
-/* Animações suaves */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -35,10 +65,34 @@ h1, h2, h3, h4 {
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slow-zoom {
+  animation: slowZoom 20s infinite alternate linear;
+}
+
+@keyframes slowZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
 }
 
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* Custom Scrollbar for a more premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #1BA19A;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #15827d;
 }

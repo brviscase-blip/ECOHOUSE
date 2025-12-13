@@ -1,50 +1,185 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Upload, Image as ImageIcon, Save, Edit3 } from 'lucide-react';
 
-const About: React.FC = () => {
+interface AboutTexts {
+  title: string;
+  description: string;
+  stats: { label: string; value: string }[];
+}
+
+interface AboutProps {
+  isAdmin?: boolean;
+}
+
+const DEFAULT_TEXTS: AboutTexts = {
+  title: 'Construir é um ato de responsabilidade.',
+  description: 'Nascemos da convicção de que o progresso técnico e a preservação ambiental são indissociáveis. Nossa engenharia foca na otimização de recursos e na longevidade das estruturas, garantindo valor real para clientes e sociedade.',
+  stats: [
+    { label: 'Energia Limpa', value: '100%' },
+    { label: 'Obras Entregues', value: '250+' },
+    { label: 'Certificações', value: 'Global' },
+    { label: 'Economia', value: '30%' }
+  ]
+};
+
+const About: React.FC<AboutProps> = ({ isAdmin }) => {
+  const [imageUrl, setImageUrl] = useState<string>(() => {
+    return localStorage.getItem('cs_about_image') || "https://images.unsplash.com/photo-1449156001437-3a1621dfbe69?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80";
+  });
+
+  const [texts, setTexts] = useState<AboutTexts>(() => {
+    const saved = localStorage.getItem('cs_about_texts');
+    return saved ? JSON.parse(saved) : DEFAULT_TEXTS;
+  });
+
+  const [isEditingTexts, setIsEditingTexts] = useState(false);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = reader.result as string;
+        setImageUrl(base64);
+        localStorage.setItem('cs_about_image', base64);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSaveTexts = () => {
+    localStorage.setItem('cs_about_texts', JSON.stringify(texts));
+    setIsEditingTexts(false);
+  };
+
   return (
-    <section id="about" className="py-32 bg-emerald-950 text-white relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-30"></div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-20">
-        <div className="md:w-1/2 relative group">
-          <div className="absolute -inset-4 border border-emerald-500/20 group-hover:border-emerald-500/50 transition-colors duration-500 pointer-events-none"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1449156001437-3a1621dfbe69?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-            alt="Nossa Equipe e Visão" 
-            className="relative z-10 w-full aspect-[4/5] object-cover filter grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl"
-          />
-        </div>
-        <div className="md:w-1/2 space-y-10">
-          <div className="space-y-4">
-            <h2 className="text-emerald-400 font-bold uppercase tracking-[0.3em] text-xs">Manifesto Verde</h2>
-            <h3 className="text-4xl md:text-5xl font-bold leading-tight tracking-tighter">
-              A sustentabilidade é o nosso <br/><span className="italic font-light">código-fonte.</span>
-            </h3>
+    <section id="about" className="py-40 bg-white dark:bg-slate-950 relative overflow-hidden transition-colors">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-24">
+        <div className="lg:w-1/2 relative group">
+          <div className="absolute -top-10 -left-10 w-40 h-40 border-l border-t border-emerald-500/20 pointer-events-none"></div>
+          
+          <div className="relative aspect-[4/5] overflow-hidden bg-slate-100 dark:bg-slate-900 shadow-2xl">
+            <img 
+              src={imageUrl} 
+              alt="Engenharia de Valor" 
+              className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+            />
+            
+            {isAdmin && (
+              <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-4">
+                <label className="flex items-center gap-3 px-6 py-3 bg-white text-slate-900 rounded-full text-[10px] font-bold uppercase tracking-widest cursor-pointer hover:bg-emerald-50 transition-all shadow-xl">
+                  <Upload className="h-4 w-4" />
+                  Trocar Imagem
+                  <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                </label>
+              </div>
+            )}
           </div>
           
-          <p className="text-emerald-100/70 text-lg font-light leading-relaxed">
-            Na CONSTRUÇÕES SUSTENTÁVEIS, não apenas seguimos normas, nós as desafiamos. Nossa jornada começou com a vontade de provar que o luxo e a alta performance técnica não precisam ser inimigos da preservação ambiental.
-          </p>
+          <div className="absolute -bottom-10 -right-10 w-40 h-40 border-r border-b border-emerald-500/20 pointer-events-none"></div>
+        </div>
+
+        <div className="lg:w-1/2 space-y-12">
+          <div className="space-y-6">
+            <div className="flex justify-between items-start">
+              <h2 className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-[0.4em]">Nosso Manifesto</h2>
+              {isAdmin && !isEditingTexts && (
+                <button 
+                  onClick={() => setIsEditingTexts(true)}
+                  className="p-2 text-emerald-600 bg-emerald-50 dark:bg-slate-900 rounded-full hover:bg-emerald-100 transition-colors"
+                >
+                  <Edit3 className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+            
+            {isEditingTexts ? (
+              <textarea 
+                value={texts.title}
+                onChange={(e) => setTexts({ ...texts, title: e.target.value })}
+                className="w-full text-5xl font-bold bg-transparent border-b-2 border-emerald-500 outline-none text-slate-900 dark:text-white leading-[1.1] tracking-tighter"
+                rows={2}
+              />
+            ) : (
+              <h3 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tighter transition-colors">
+                {texts.title.split(' ').map((word, i) => (
+                  <span key={i} className={word.toLowerCase() === 'responsabilidade.' ? 'text-emerald-500' : ''}>
+                    {word}{' '}
+                  </span>
+                ))}
+              </h3>
+            )}
+          </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
-            {[
-              'Engenharia de Baixo Carbono',
-              'Gestão Inteligente de Água',
-              'Canteiros Energia Zero',
-              'Economia Circular de Materiais'
-            ].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-4 group cursor-default">
-                <div className="w-2 h-2 bg-emerald-500 group-hover:scale-150 transition-transform"></div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-200">{item}</span>
+          {isEditingTexts ? (
+            <textarea 
+              value={texts.description}
+              onChange={(e) => setTexts({ ...texts, description: e.target.value })}
+              className="w-full text-lg font-light leading-loose bg-transparent border border-emerald-500/30 p-4 rounded-xl text-slate-900 dark:text-white outline-none"
+              rows={5}
+            />
+          ) : (
+            <p className="text-gray-500 dark:text-gray-300 text-lg font-light leading-loose transition-colors">
+              {texts.description}
+            </p>
+          )}
+          
+          <div className="grid grid-cols-2 gap-y-10 pt-4 border-t border-gray-100 dark:border-slate-800 transition-colors">
+            {texts.stats.map((stat, idx) => (
+              <div key={idx} className="space-y-2">
+                {isEditingTexts ? (
+                  <div className="space-y-1">
+                    <input 
+                      type="text" 
+                      value={stat.value}
+                      onChange={(e) => {
+                        const newStats = [...texts.stats];
+                        newStats[idx].value = e.target.value;
+                        setTexts({ ...texts, stats: newStats });
+                      }}
+                      className="w-full bg-transparent border-b border-emerald-500 font-bold text-slate-900 dark:text-white outline-none"
+                    />
+                    <input 
+                      type="text" 
+                      value={stat.label}
+                      onChange={(e) => {
+                        const newStats = [...texts.stats];
+                        newStats[idx].label = e.target.value;
+                        setTexts({ ...texts, stats: newStats });
+                      }}
+                      className="w-full bg-transparent border-b border-emerald-500/30 text-[9px] font-bold uppercase tracking-[0.2em] text-emerald-600 outline-none"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">{stat.value}</p>
+                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">{stat.label}</p>
+                  </>
+                )}
               </div>
             ))}
           </div>
 
-          <div className="pt-8 border-t border-emerald-500/20">
-            <blockquote className="italic text-emerald-100/60 font-light border-l-2 border-emerald-500 pl-6 py-2">
-              "Construímos hoje pensando na resiliência do amanhã."
-            </blockquote>
-          </div>
+          {isEditingTexts && (
+            <div className="flex gap-4">
+              <button 
+                onClick={handleSaveTexts}
+                className="flex items-center gap-2 px-8 py-3 bg-emerald-600 text-white rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-emerald-700 transition-all shadow-xl"
+              >
+                <Save className="h-4 w-4" /> Salvar Textos
+              </button>
+              <button 
+                onClick={() => {
+                  const saved = localStorage.getItem('cs_about_texts');
+                  setTexts(saved ? JSON.parse(saved) : DEFAULT_TEXTS);
+                  setIsEditingTexts(false);
+                }}
+                className="px-8 py-3 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-slate-300 transition-all"
+              >
+                Cancelar
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>

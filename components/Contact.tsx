@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, Send } from 'lucide-react';
+import { Phone, Mail, Send, MapPin } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
@@ -13,111 +13,103 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative py-32 bg-slate-950 text-white overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-emerald-900/10 blur-[120px] pointer-events-none"></div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+    <section id="contact" className="py-48 bg-gray-100 dark:bg-slate-900/50 relative transition-colors border-t border-gray-200 dark:border-slate-800">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-32">
           
-          <div>
-            <h2 className="text-emerald-400 font-bold tracking-[0.2em] uppercase text-xs mb-4">Contato</h2>
-            <h3 className="text-5xl md:text-6xl font-bold mb-8 leading-tight tracking-tighter">
-              Vamos erguer o seu <br/><span className="text-emerald-500">próximo marco?</span>
-            </h3>
-            <p className="text-gray-400 mb-12 text-lg font-light leading-relaxed max-w-md">
-              Agende uma reunião técnica e descubra como nossa metodologia pode otimizar seu empreendimento.
-            </p>
+          <div className="space-y-16">
+            <div className="space-y-6">
+              <h2 className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold tracking-[0.4em] uppercase flex items-center gap-3">
+                <span className="h-px w-8 bg-emerald-500"></span> Iniciar Projeto
+              </h2>
+              <h3 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-tight tracking-tighter transition-colors">
+                Sua visão, nossa <br/><span className="text-emerald-500">execução técnica.</span>
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 text-lg font-light leading-relaxed max-w-md transition-colors">
+                Pronto para transformar sua infraestrutura? Nossa equipe técnica está disponível para diagnósticos precisos.
+              </p>
+            </div>
 
-            <div className="space-y-12">
-              <div className="flex items-center group">
-                <div className="flex-shrink-0 w-12 h-12 border border-emerald-500/30 rounded-full flex items-center justify-center group-hover:bg-emerald-500 transition-colors">
-                  <Phone className="h-5 w-5 text-emerald-400 group-hover:text-white" />
+            <div className="space-y-10">
+              <div className="flex items-start gap-6 group">
+                <div className="p-3 bg-white dark:bg-slate-800 rounded-lg shadow-sm">
+                  <Phone className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                 </div>
-                <div className="ml-6">
-                  <p className="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-1">Telefone</p>
-                  <p className="text-xl font-medium tracking-tight">(92) 98182 1090</p>
+                <div>
+                  <p className="text-[9px] font-bold text-slate-500 dark:text-gray-400 uppercase tracking-widest mb-1">Central de Atendimento</p>
+                  <p className="text-xl font-bold text-slate-900 dark:text-white transition-colors">(92) 98182 1090</p>
                 </div>
               </div>
 
-              <div className="flex items-center group">
-                <div className="flex-shrink-0 w-12 h-12 border border-emerald-500/30 rounded-full flex items-center justify-center group-hover:bg-emerald-500 transition-colors">
-                  <Mail className="h-5 w-5 text-emerald-400 group-hover:text-white" />
+              <div className="flex items-start gap-6 group">
+                <div className="p-3 bg-white dark:bg-slate-800 rounded-lg shadow-sm">
+                  <Mail className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                 </div>
-                <div className="ml-6">
-                  <p className="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-1">E-mail</p>
-                  <p className="text-xl font-medium tracking-tight">financeiroehc.construcoes@gmail.com</p>
+                <div>
+                  <p className="text-[9px] font-bold text-slate-500 dark:text-gray-400 uppercase tracking-widest mb-1">E-mail Corporativo</p>
+                  <p className="text-xl font-bold text-slate-900 dark:text-white break-all transition-colors">financeiroehc.construcoes@gmail.com</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-none p-10 shadow-2xl text-slate-900">
+          <div className="bg-white dark:bg-slate-900 p-12 md:p-16 shadow-[0_40px_100px_rgba(0,0,0,0.08)] dark:shadow-2xl border border-white dark:border-slate-800 transition-all rounded-3xl">
             {formStatus === 'success' ? (
-              <div className="h-full flex flex-col items-center justify-center text-center py-12">
-                <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mb-6">
-                  <Send className="h-10 w-10 text-emerald-600" />
+              <div className="h-full flex flex-col items-center justify-center text-center py-12 animate-fade-in">
+                <div className="w-16 h-16 bg-emerald-50 dark:bg-slate-700 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mb-8">
+                  <Send className="h-6 w-6" />
                 </div>
-                <h4 className="text-3xl font-bold text-slate-900 mb-3">Recebido!</h4>
-                <p className="text-gray-500 font-light">Em breve um de nossos engenheiros entrará em contato.</p>
+                <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Recebido com Sucesso.</h4>
+                <p className="text-gray-600 dark:text-gray-400 font-light mb-10">Retornaremos com uma análise inicial em até 24 horas.</p>
                 <button 
                   onClick={() => setFormStatus('idle')}
-                  className="mt-8 text-sm font-bold uppercase tracking-widest text-emerald-600 hover:text-emerald-800"
+                  className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600 hover:text-emerald-800 transition-colors"
                 >
-                  Nova Mensagem
+                  Nova Solicitação
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="border-b border-gray-200 focus-within:border-emerald-500 transition-colors">
-                    <label htmlFor="name" className="block text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Nome Completo</label>
+              <form onSubmit={handleSubmit} className="space-y-10">
+                <div className="space-y-8">
+                  <div className="relative group">
                     <input
                       type="text"
                       id="name"
                       required
-                      className="w-full py-2 bg-transparent text-slate-900 outline-none text-lg font-medium"
-                      placeholder="Ex: João Silva"
+                      placeholder="Nome / Empresa"
+                      className="w-full py-4 bg-transparent border-b border-emerald-500/30 dark:border-emerald-500/20 text-slate-900 dark:text-white outline-none focus:border-emerald-500 text-sm font-bold transition-all placeholder:text-emerald-600/70 dark:placeholder:text-emerald-400/50"
                     />
                   </div>
-                  <div className="border-b border-gray-200 focus-within:border-emerald-500 transition-colors">
-                    <label htmlFor="phone" className="block text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">WhatsApp</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <input
                       type="tel"
                       id="phone"
-                      className="w-full py-2 bg-transparent text-slate-900 outline-none text-lg font-medium"
-                      placeholder="(00) 00000-0000"
+                      placeholder="WhatsApp"
+                      className="w-full py-4 bg-transparent border-b border-emerald-500/30 dark:border-emerald-500/20 text-slate-900 dark:text-white outline-none focus:border-emerald-500 text-sm font-bold transition-all placeholder:text-emerald-600/70 dark:placeholder:text-emerald-400/50"
+                    />
+                    <input
+                      type="email"
+                      id="email"
+                      required
+                      placeholder="E-mail"
+                      className="w-full py-4 bg-transparent border-b border-emerald-500/30 dark:border-emerald-500/20 text-slate-900 dark:text-white outline-none focus:border-emerald-500 text-sm font-bold transition-all placeholder:text-emerald-600/70 dark:placeholder:text-emerald-400/50"
                     />
                   </div>
-                </div>
-
-                <div className="border-b border-gray-200 focus-within:border-emerald-500 transition-colors">
-                  <label htmlFor="email" className="block text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">E-mail Corporativo</label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    className="w-full py-2 bg-transparent text-slate-900 outline-none text-lg font-medium"
-                    placeholder="exemplo@empresa.com"
-                  />
-                </div>
-
-                <div className="border-b border-gray-200 focus-within:border-emerald-500 transition-colors">
-                  <label htmlFor="message" className="block text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Resumo do Projeto</label>
                   <textarea
                     id="message"
-                    rows={3}
+                    rows={4}
                     required
-                    className="w-full py-2 bg-transparent text-slate-900 outline-none text-lg font-medium resize-none"
-                    placeholder="Descreva brevemente sua necessidade..."
+                    placeholder="Descrição breve do seu projeto..."
+                    className="w-full py-4 bg-transparent border-b border-emerald-500/30 dark:border-emerald-500/20 text-slate-900 dark:text-white outline-none focus:border-emerald-500 text-sm font-bold resize-none transition-all placeholder:text-emerald-600/70 dark:placeholder:text-emerald-400/50"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
                   disabled={formStatus === 'submitting'}
-                  className="w-full bg-slate-950 hover:bg-emerald-700 text-white font-bold py-5 text-xs uppercase tracking-[0.3em] transition-all disabled:opacity-70"
+                  className="w-full bg-slate-950 dark:bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-5 text-[10px] uppercase tracking-[0.4em] transition-all disabled:opacity-70 flex items-center justify-center gap-3 shadow-xl rounded-xl"
                 >
-                  {formStatus === 'submitting' ? 'Processando...' : 'Enviar Solicitação'}
+                  {formStatus === 'submitting' ? 'Enviando...' : 'Solicitar Orçamento Técnico'}
                 </button>
               </form>
             )}

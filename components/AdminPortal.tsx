@@ -47,41 +47,41 @@ const AdminPortal: React.FC<AdminPortalProps> = ({ onLogin, onLogout, isAdmin })
       {/* Modal de Login */}
       {showLogin && (
         <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
-          <div className="bg-white w-full max-w-md p-10 shadow-2xl relative border border-emerald-500/20">
+          <div className="bg-white dark:bg-slate-900 w-full max-w-md p-10 shadow-2xl relative border border-emerald-500/20 transition-colors duration-300">
             <button 
               onClick={() => setShowLogin(false)}
-              className="absolute top-6 right-6 text-slate-400 hover:text-slate-900"
+              className="absolute top-6 right-6 text-slate-400 hover:text-slate-900 dark:hover:text-white"
             >
               <X className="h-6 w-6" />
             </button>
             
             <div className="text-center mb-8">
-              <div className="inline-flex p-4 bg-emerald-50 text-emerald-600 mb-4">
+              <div className="inline-flex p-4 bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 mb-4 transition-colors">
                 <Lock className="h-6 w-6" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-900 uppercase tracking-tighter">Acesso Restrito</h2>
-              <p className="text-gray-500 text-sm font-light mt-2">Identifique-se para gerenciar o conteúdo.</p>
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white uppercase tracking-tighter transition-colors">Acesso Restrito</h2>
+              <p className="text-gray-500 dark:text-gray-300 text-sm font-light mt-2 transition-colors">Identifique-se para gerenciar o conteúdo.</p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-6">
               <div>
-                <label className="block text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-2">E-mail</label>
+                <label className="block text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-2">E-mail</label>
                 <input 
                   type="email" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 bg-gray-50 border-b-2 border-transparent focus:border-emerald-500 outline-none transition-all font-medium"
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-800 text-slate-900 dark:text-white border-b-2 border-transparent focus:border-emerald-500 outline-none transition-all font-medium placeholder:text-gray-400 dark:placeholder:text-slate-500"
                   placeholder="seu@email.com"
                   required
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-2">Senha</label>
+                <label className="block text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-2">Senha</label>
                 <input 
                   type="password" 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-gray-50 border-b-2 border-transparent focus:border-emerald-500 outline-none transition-all font-medium"
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-800 text-slate-900 dark:text-white border-b-2 border-transparent focus:border-emerald-500 outline-none transition-all font-medium placeholder:text-gray-400 dark:placeholder:text-slate-500"
                   placeholder="••••"
                   required
                 />
@@ -89,7 +89,7 @@ const AdminPortal: React.FC<AdminPortalProps> = ({ onLogin, onLogout, isAdmin })
               {error && <p className="text-red-500 text-[10px] font-bold uppercase text-center">{error}</p>}
               <button 
                 type="submit"
-                className="w-full bg-slate-950 hover:bg-emerald-600 text-white font-bold py-4 text-xs uppercase tracking-[0.3em] transition-all shadow-lg"
+                className="w-full bg-slate-950 dark:bg-emerald-600 hover:bg-emerald-700 dark:hover:bg-emerald-500 text-white font-bold py-4 text-xs uppercase tracking-[0.3em] transition-all shadow-lg"
               >
                 Entrar no Editor
               </button>

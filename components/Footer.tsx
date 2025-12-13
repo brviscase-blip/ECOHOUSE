@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Facebook, Instagram, Linkedin } from 'lucide-react';
 
 const Footer: React.FC = () => {
-  // COLE O LINK DA SUA LOGO AQUI TAMBÉM
-  const LOGO_URL = "/img/logo.png";
+  const [logoUrl, setLogoUrl] = useState<string>(() => {
+    return localStorage.getItem('cs_site_logo') || "/img/logo.png";
+  });
+  const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    // Escutar mudanças no localStorage (caso a logo mude na Navbar)
+    const handleStorage = () => {
+      setLogoUrl(localStorage.getItem('cs_site_logo') || "/img/logo.png");
+      setImgError(false);
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
 
   return (
     <footer className="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
@@ -11,23 +23,19 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div>
             <div className="mb-6">
-              <img 
-                src={LOGO_URL} 
-                alt="CONSTRUÇÕES SUSTENTÁVEIS" 
-                className="h-10 w-auto object-contain brightness-0 invert" 
-                crossOrigin="anonymous"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const parent = target.parentElement;
-                  if (parent && !parent.querySelector('.footer-fallback')) {
-                    const span = document.createElement('span');
-                    span.className = 'footer-fallback font-bold text-xl text-white';
-                    span.innerText = 'CONSTRUÇÕES SUSTENTÁVEIS';
-                    parent.appendChild(span);
-                  }
-                }}
-              />
+              {!imgError ? (
+                <img 
+                  src={logoUrl} 
+                  alt="CONSTRUÇÕES SUSTENTÁVEIS" 
+                  className="h-10 w-auto object-contain brightness-0 invert" 
+                  crossOrigin="anonymous"
+                  onError={() => setImgError(true)}
+                />
+              ) : (
+                <span className="font-bold text-xl text-white">
+                  CONSTRUÇÕES <span className="text-emerald-500">SUSTENTÁVEIS</span>
+                </span>
+              )}
             </div>
             <p className="text-gray-400 leading-relaxed mb-6">
               Comprometidos com a excelência na construção civil e a preservação do meio ambiente. Construímos hoje pensando no amanhã.
