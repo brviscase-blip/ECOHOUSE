@@ -9,11 +9,10 @@ const Navbar: React.FC = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navLinks = [
-    { name: 'Início', href: '#home' },
-    { name: 'Serviços', href: '#services' },
-    { name: 'Projetos', href: '#projects' },
-    { name: 'Recursos', href: '#resources' },
-    { name: 'Blog', href: '#blog' },
+    { name: 'HOME', href: '#home' },
+    { name: 'CERTIFICAÇÕES', href: '#certifications' },
+    { name: 'SOBRE NÓS', href: '#about' },
+    { name: 'CONTEÚDO', href: '#content' },
   ];
 
   return (
@@ -23,7 +22,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center">
             <div 
               className="flex-shrink-0 flex items-center cursor-pointer" 
-              onClick={() => window.location.href = '#'}
+              onClick={() => window.location.href = '#home'}
             >
               <img 
                 src={LOGO_URL} 
@@ -50,16 +49,16 @@ const Navbar: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-500 hover:text-emerald-600 text-sm font-semibold uppercase tracking-widest transition-colors duration-200"
+                className="text-gray-500 hover:text-emerald-600 text-[11px] font-bold uppercase tracking-[0.2em] transition-colors duration-200"
               >
                 {link.name}
               </a>
             ))}
             <a
               href="#contact"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 text-sm font-extrabold uppercase tracking-[0.2em] transition-all shadow-md hover:shadow-emerald-500/20 flex items-center justify-center text-center"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 text-[11px] font-extrabold uppercase tracking-[0.2em] transition-all shadow-md hover:shadow-emerald-500/20 flex items-center justify-center text-center"
             >
-              Contato
+              CONTATO
             </a>
           </div>
 
@@ -82,7 +81,7 @@ const Navbar: React.FC = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-4 text-sm font-bold uppercase tracking-widest text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
+                className="block px-4 py-4 text-xs font-bold uppercase tracking-widest text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
               >
                 {link.name}
               </a>
@@ -90,9 +89,9 @@ const Navbar: React.FC = () => {
             <a
               href="#contact"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-4 text-sm font-extrabold uppercase tracking-widest text-emerald-600 border-t border-gray-100 bg-emerald-50"
+              className="block px-4 py-4 text-xs font-extrabold uppercase tracking-widest text-emerald-600 border-t border-gray-100 bg-emerald-50"
             >
-              Contato
+              CONTATO
             </a>
           </div>
         </div>

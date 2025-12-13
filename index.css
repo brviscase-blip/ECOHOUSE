@@ -6,12 +6,6 @@
 
 html {
   scroll-behavior: smooth;
-  /* Redução do zoom geral em 25% (Escala 0.75) */
-  zoom: 0.75;
-  -moz-transform: scale(0.75);
-  -moz-transform-origin: top center;
-  width: 133.33%; /* Ajuste para compensar a escala no Firefox e manter largura total */
-  height: 133.33%;
 }
 
 body {
