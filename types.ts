@@ -14,3 +14,21 @@ export interface Service {
   icon: React.ReactNode;
   description: string;
 }
+
+export interface BlogPost {
+  id: number;
+  date: string;
+  category: string;
+  title: string;
+  excerpt: string;
+  imageUrl: string;
+  readTime: string;
+}
+
+export interface Resource {
+  id: number;
+  title: string;
+  type: string;
+  description: string;
+  icon: React.ReactNode;
+}

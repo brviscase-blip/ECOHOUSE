@@ -4,7 +4,6 @@ import { Menu, X } from 'lucide-react';
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   
-  // COLE O LINK DA SUA LOGO AQUI (Imgur, PostImages, Cloudinary, etc.)
   const LOGO_URL = "/img/logo.png"; 
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -13,12 +12,12 @@ const Navbar: React.FC = () => {
     { name: 'Início', href: '#home' },
     { name: 'Serviços', href: '#services' },
     { name: 'Projetos', href: '#projects' },
-    { name: 'Sustentabilidade', href: '#sustainability' },
-    { name: 'Contato', href: '#contact' },
+    { name: 'Recursos', href: '#resources' },
+    { name: 'Blog', href: '#blog' },
   ];
 
   return (
-    <nav className="bg-white shadow-md fixed w-full z-50 top-0">
+    <nav className="bg-white/90 backdrop-blur-md shadow-sm fixed w-full z-50 top-0 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex items-center">
@@ -37,7 +36,7 @@ const Navbar: React.FC = () => {
                   const parent = target.parentElement;
                   if (parent && !parent.querySelector('.fallback-text')) {
                     const span = document.createElement('span');
-                    span.className = 'fallback-text font-bold text-xl text-emerald-900 tracking-tight whitespace-nowrap';
+                    span.className = 'fallback-text font-bold text-xl text-emerald-900 tracking-tight whitespace-nowrap uppercase';
                     span.innerText = 'CONSTRUÇÕES SUSTENTÁVEIS';
                     parent.appendChild(span);
                   }
@@ -51,16 +50,16 @@ const Navbar: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-600 hover:text-emerald-600 font-medium transition-colors duration-200"
+                className="text-gray-500 hover:text-emerald-600 text-sm font-semibold uppercase tracking-widest transition-colors duration-200"
               >
                 {link.name}
               </a>
             ))}
             <a
               href="#contact"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition-all shadow-md hover:shadow-emerald-500/20"
             >
-              Orçamento
+              Contato
             </a>
           </div>
 
@@ -69,25 +68,32 @@ const Navbar: React.FC = () => {
               onClick={toggleMenu}
               className="text-gray-600 hover:text-emerald-600 focus:outline-none"
             >
-              {isOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+              {isOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
             </button>
           </div>
         </div>
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100">
+        <div className="md:hidden bg-white border-t border-gray-100 animate-fade-in">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-3 py-4 text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-md"
+                className="block px-4 py-4 text-sm font-bold uppercase tracking-widest text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
               >
                 {link.name}
               </a>
             ))}
+            <a
+              href="#contact"
+              onClick={() => setIsOpen(false)}
+              className="block px-4 py-4 text-sm font-bold uppercase tracking-widest text-emerald-600 border-t border-gray-100"
+            >
+              Contato
+            </a>
           </div>
         </div>
       )}
